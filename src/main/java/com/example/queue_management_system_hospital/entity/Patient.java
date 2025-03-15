@@ -1,15 +1,18 @@
 package com.example.queue_management_system_hospital.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "patient")
 public class Patient {
     @Id
     private int patient_id;
-    private int user_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private Date date_of_birth;
     private String gender;
     private String address;
@@ -18,9 +21,9 @@ public class Patient {
 
     public Patient(){}
 
-    public Patient(int patient_id, int user_id, Date date_of_birth, String gender, String address, String phone_number, String email) {
+    public Patient(int patient_id, User user, Date date_of_birth, String gender, String address, String phone_number, String email) {
         this.patient_id = patient_id;
-        this.user_id = user_id;
+        this.user = user;
         this.date_of_birth = date_of_birth;
         this.gender = gender;
         this.address = address;
@@ -36,12 +39,12 @@ public class Patient {
         this.patient_id = patient_id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getDate_of_birth() {
