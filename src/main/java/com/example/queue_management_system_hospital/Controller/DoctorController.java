@@ -8,56 +8,48 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/doctor")
-@CrossOrigin(origins ="*")
+@CrossOrigin(origins = "http://localhost:63342",allowedHeaders = "*")
+
 public class DoctorController {
 
     @Autowired
     private DoctorServiceImpl doctorService ;
 
-    @PostMapping(path = "save")
-    public ResponseUtil getDoctor(@RequestBody DoctorDTO doctorDTO) {
-        try {
-            doctorService.save(doctorDTO);
-            return new ResponseUtil(201, "Doctor is saved", null);
-        } catch (RuntimeException e) {
-            return new ResponseUtil(400, e.getMessage(), null);
-        }
+    @PostMapping( "save")
+    public ResponseUtil saveDoctor(@RequestBody DoctorDTO doctorDTO) {
+        doctorService.addDoctor(doctorDTO);
+        return new ResponseUtil(201,"Doctor Saved",null);
     }
 
-    @GetMapping(path = "getAll")
-    public ResponseUtil getDoctors() {
-
-        return new ResponseUtil(
-                200, "doctor list retrieved", doctorService.getAll());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseUtil getDoctorById(@PathVariable int id) {
-        try {
-            return new ResponseUtil(200, "Doctor found", doctorService.getById(id));
-        } catch (RuntimeException e) {
-            return new ResponseUtil(404, e.getMessage(), null);
-        }
-    }
-    @PutMapping(path = "update")
+    @PutMapping("update")
     public ResponseUtil updateDoctor(@RequestBody DoctorDTO doctorDTO) {
-        try {
-            doctorService.update(doctorDTO);
-            return new ResponseUtil(200, "Doctor is updated", null);
-        } catch (RuntimeException e) {
-            return new ResponseUtil(400, e.getMessage(), null);
-        }
+        doctorService.updateDoctor(doctorDTO);
+        return new ResponseUtil(200,"Doctor Updated",null);
+
     }
-
-
     @DeleteMapping(path = "delete/{id}")
-    public ResponseUtil deleteDoctor(@PathVariable int id) {
-        try {
-            doctorService.delete(id);
-            return new ResponseUtil(200, "Doctor is deleted", null);
-        } catch (RuntimeException e) {
-            return new ResponseUtil(404, e.getMessage(), null);
-        }
+    public ResponseUtil deleteDoctor(@PathVariable("id") int id) {
+        doctorService.deleteDoctor(id);
+        return new ResponseUtil(200,"Doctor Deleted",null);
     }
+    @GetMapping("getAll")
+    public ResponseUtil getAllDoctors() {
+        return new ResponseUtil(
+                200,
+                "Doctor List",
+                doctorService.getAllDoctors());
+    }
+    @GetMapping("getCustomerId")
+    public ResponseUtil getDoctorsId() {
+        return new ResponseUtil(
+                200,
+                "doctor id List",
+                doctorService.getDoctorsId());
+    }
+    @GetMapping("getDoctorById/{id}")
+    public ResponseUtil getDoctorById(@PathVariable int id) {
+        DoctorDTO doctor = doctorService.getDoctorById(id);
+        return new ResponseUtil(200, "Doctor Found", doctor);
 
+    }
 }

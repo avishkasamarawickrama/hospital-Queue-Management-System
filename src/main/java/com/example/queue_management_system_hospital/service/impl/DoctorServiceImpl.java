@@ -28,43 +28,53 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void save(DoctorDTO doctorDTO) {
+    @Override
+    public void addDoctor(DoctorDTO doctorDTO) {
         if (doctorRepo.existsById(doctorDTO.getDoctor_id())) {
-
-        throw new RuntimeException("doctor already exists");
-    }
-     doctorRepo.save(modelMapper.map(doctorDTO, Doctor.class));
-    }
-    @Override
-    public DoctorDTO getById(int id){
-        Optional<Doctor> optionalDoctor = doctorRepo.findById(id);
-        if (optionalDoctor.isPresent()){
-            return modelMapper.map(optionalDoctor.get(),DoctorDTO.class);
-
-        }
-        throw new RuntimeException("doctor not found ");
-    }
-    public List<DoctorDTO> getAll(){
-        return modelMapper.map(
-                doctorRepo.findAll(),
-                new TypeToken<List<DoctorDTO>>(){}.getType()
-        );
-    }
-    @Override
-    public void update(DoctorDTO doctorDTO){
-        if (!doctorRepo.existsById(doctorDTO.getDoctor_id())){
-
-        throw new RuntimeException("doctor doesn't exists");
+            throw new RuntimeException("Doctor already exists");
         }
         doctorRepo.save(modelMapper.map(doctorDTO, Doctor.class));
-
     }
+
+
     @Override
-    public void delete(int id){
-        if (!doctorRepo.existsById(id)){
-            throw new RuntimeException("Doctor doesn't exist");
+    public void updateDoctor(DoctorDTO doctorDTO) {
+        if (!doctorRepo.existsById(doctorDTO.getDoctor_id())) {
+            throw new RuntimeException("Doctor does not exist");
         }
+        doctorRepo.save(modelMapper.map(doctorDTO, Doctor.class));
+    }
+
+
+
+    @Override
+    public void deleteDoctor(int id) {
         doctorRepo.deleteById(id);
     }
+
+    @Override
+    public List<DoctorDTO> getAllDoctors() {
+        return modelMapper.map(doctorRepo.findAll(),
+                new TypeToken<List<DoctorDTO>>() {}.getType());
+    }
+
+    @Override
+    public List<Integer> getDoctorsId() {
+        return doctorRepo.getDoctorsId();
+    }
+
+   /* @Override
+    public CustomerDTO getCustomerById(String id) {
+        return customerRepo.findNameById(id);
+    }*/
+
+    @Override
+    public DoctorDTO getDoctorById(int id) {
+        Doctor doctor = doctorRepo.findById(id).orElseThrow(() ->
+                new RuntimeException("doctor does not exist")
+        );
+        return modelMapper.map(doctor, DoctorDTO.class);
+    }
+
 
 }

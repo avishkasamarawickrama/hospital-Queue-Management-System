@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface DoctorService {
 
-    void save(DoctorDTO doctorDTO);
+    void addDoctor(DoctorDTO doctorDTO);
+    void updateDoctor(DoctorDTO doctorDTO);
+    void deleteDoctor(int id);
+    List<DoctorDTO> getAllDoctors();
+    List<Integer> getDoctorsId();
 
-    DoctorDTO getById(int id);
-
-    List<DoctorDTO> getAll();
-    void update(DoctorDTO doctorDTO);
-    void delete(int id);
+    DoctorDTO getDoctorById(int id);
 }
