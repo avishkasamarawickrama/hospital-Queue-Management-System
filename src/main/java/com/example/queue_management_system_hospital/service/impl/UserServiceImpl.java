@@ -1,58 +1,70 @@
 package com.example.queue_management_system_hospital.service.impl;
 
 import com.example.queue_management_system_hospital.dto.UserDTO;
-
 import com.example.queue_management_system_hospital.entity.User;
 import com.example.queue_management_system_hospital.repo.UserRepo;
 import com.example.queue_management_system_hospital.service.UserService;
+import com.example.queue_management_system_hospital.util.VarList;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.HashSet;
+
+import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService {
+@Transactional
+public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserRepo userRepo;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    public void save(UserDTO userDTO){
-        if (userRepo.existsById(userDTO.getUser_id()));
-        userRepo.save(modelMapper.map(userDTO, User.class));
-        throw new RuntimeException("user already exists");
-    }
     @Override
-    public UserDTO getById(int id){
-        Optional<User> optionalUser = userRepo.findById(id);
-        if (optionalUser.isPresent()){
-            return modelMapper.map(optionalUser.get(),UserDTO.class);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepo.findByEmail(email);
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
+    }
 
-        }
-        throw new RuntimeException("patient not found ");
+    public UserDTO loadUserDetailsByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo.findByEmail(username);
+        return modelMapper.map(user,UserDTO.class);
     }
-    public List<UserDTO> getAll(){
-        return modelMapper.map(
-                userRepo.findAll(),
-                new TypeToken<List<UserDTO>>(){}.getType()
-        );
+
+    private Set<SimpleGrantedAuthority> getAuthority(User user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+        return authorities;
     }
-    public void update(UserDTO userDTO){
-        if (userRepo.existsById(userDTO.getUser_id())){
-            userRepo.save(
-                    modelMapper.map(userDTO,User.class)
-            );
+
+    @Override
+    public UserDTO searchUser(String username) {
+        if (userRepo.existsByEmail(username)) {
+            User user=userRepo.findByEmail(username);
+            return modelMapper.map(user,UserDTO.class);
+        } else {
+            return null;
         }
-        throw new RuntimeException("user doesn't exists");
     }
-    public void delete(int id){
-        if (userRepo.existsById(id)){
-            userRepo.deleteById(id);
+
+    @Override
+    public int saveUser(UserDTO userDTO) {
+        if (userRepo.existsByEmail(userDTO.getEmail())) {
+            return VarList.Not_Acceptable;
+        } else {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            // userDTO.setRole("USER");
+            userRepo.save(modelMapper.map(userDTO, User.class));
+            return VarList.Created;
         }
-        throw new RuntimeException("user doesn't exists");
     }
 }

@@ -1,44 +1,58 @@
 package com.example.queue_management_system_hospital.Controller;
 
+import com.example.queue_management_system_hospital.dto.AuthDTO;
+import com.example.queue_management_system_hospital.dto.ResponseDTO;
 import com.example.queue_management_system_hospital.dto.UserDTO;
-import com.example.queue_management_system_hospital.service.impl.UserServiceImpl;
-import com.example.queue_management_system_hospital.util.ResponseUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.queue_management_system_hospital.service.UserService;
+import com.example.queue_management_system_hospital.util.JwtUtil;
+import com.example.queue_management_system_hospital.util.VarList;
+import jakarta.validation.Valid;
+
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/v1/user")
-@CrossOrigin(origins = "*")
+@RequestMapping("api/v1/user")
+@CrossOrigin("*")
 public class UserController {
-    @Autowired
-    private UserServiceImpl userService;
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
 
-    @PostMapping(path ="save")
-    public ResponseUtil getUser(@RequestBody UserDTO userDTO) {
-        userService.save(userDTO);
-
-        return new ResponseUtil(201,"user is saved",null);
-
+    //constructor injection
+    public UserController(UserService userService, JwtUtil jwtUtil) {
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
+    }
+    @PostMapping(value = "/register")
+    public ResponseEntity<ResponseDTO> registerUser(@RequestBody @Valid UserDTO userDTO) {
+        try {
+            int res = userService.saveUser(userDTO);
+            switch (res) {
+                case VarList.Created -> {
+                    String token = jwtUtil.generateToken(userDTO);
+                    AuthDTO authDTO = new AuthDTO();
+                    authDTO.setEmail(userDTO.getEmail());
+                    authDTO.setToken(token);
+                    return ResponseEntity.status(HttpStatus.CREATED)
+                            .body(new ResponseDTO(VarList.Created, "Success", authDTO));
+                }
+                case VarList.Not_Acceptable -> {
+                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                            .body(new ResponseDTO(VarList.Not_Acceptable, "Email Already Used", null));
+                }
+                default -> {
+                    return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                            .body(new ResponseDTO(VarList.Bad_Gateway, "Error", null));
+                }
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
     }
 
-    @GetMapping(path ="getAll")
-    public ResponseUtil getUsers() {
-        return new ResponseUtil(200,"Item list",userService.getAll());
-    }
-    @GetMapping("/{id}")
-    public ResponseUtil getById(@PathVariable int id) {
-        return new ResponseUtil(200, "Success", userService.getById(id));
-    }
-    @PutMapping(path = "update")
-    public ResponseUtil updateUser(@RequestBody UserDTO userDTO) {
-        userService.update(userDTO);
 
-        return new ResponseUtil(200,"user is updated",null);
-    }
 
-    @DeleteMapping(path = "delete/{id}")
-    public ResponseUtil deleteUser(@PathVariable int id) {
-        userService.delete(id);
-        return new ResponseUtil(200,"user is deleted",null);
-    }
 }

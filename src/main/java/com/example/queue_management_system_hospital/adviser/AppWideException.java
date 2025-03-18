@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppWideException {
     @ExceptionHandler(Exception.class)
     public ResponseUtil exceptionHandler(Exception ex){
-        return new ResponseUtil(500,"ex.getMessage",null);
+        return new ResponseUtil(500,ex.getMessage(),null);
     }
 }

@@ -1,42 +1,51 @@
 package com.example.queue_management_system_hospital.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.UUID;
+
 
 @Entity
-public class User {
+@Table(name = "systemuser")
+public class User implements Serializable {
     @Id
-    private int user_id;
-    private String name;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uid;
+    @Column(unique = true)
+    private String email;
     private String password;
-    private int phone;
+    private String name;
     private String role;
 
     public User() {
     }
 
-    public User(int user_id, String name, String password, int phone, String role) {
-        this.user_id = user_id;
-        this.name = name;
+    public User(UUID uid, String email, String password, String name, String role) {
+        this.uid = uid;
+        this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.name = name;
         this.role = role;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public UUID getUid() {
+        return uid;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUid(UUID uid) {
+        this.uid = uid;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -47,12 +56,12 @@ public class User {
         this.password = password;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getName() {
+        return name;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRole() {

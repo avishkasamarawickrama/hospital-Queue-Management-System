@@ -1,38 +1,30 @@
 package com.example.queue_management_system_hospital.dto;
 
-public class UserDTO {
-    private int user_id;
-    private String name;
-    private String password;
-    private int phone;
-    private String role;
 
+
+
+public class UserDTO {
+    private String email;
+    private String password;
+    private String name;
+    private String role;
 
     public UserDTO() {
     }
 
-    public UserDTO(int user_id, String name, String password, int phone, String role) {
-        this.user_id = user_id;
-        this.name = name;
+    public UserDTO(String email, String password, String name, String role) {
+        this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.name = name;
         this.role = role;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -43,12 +35,12 @@ public class UserDTO {
         this.password = password;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getName() {
+        return name;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRole() {
