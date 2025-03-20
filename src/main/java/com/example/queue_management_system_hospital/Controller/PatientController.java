@@ -8,31 +8,47 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/patient")
-@CrossOrigin(origins ="*")
+@CrossOrigin(origins = "http://localhost:63342",allowedHeaders = "*")
+
 public class PatientController {
     @Autowired
     private PatientServiceImpl patientService;
 
-    @PostMapping(path = "save")
-    public ResponseUtil getPatient(@RequestBody PatientDTO patientDTO) {
-        {
-            patientService.save(patientDTO);
-            return new ResponseUtil(201, "Patient is saved", null);
-        }
+    @PostMapping( "save")
+    public ResponseUtil savePatient(@RequestBody PatientDTO patientDTO) {
+        patientService.addPatient(patientDTO);
+        return new ResponseUtil(201,"patient Saved",null);
+    }
+
+    @PutMapping("update")
+    public ResponseUtil updatePatient(@RequestBody PatientDTO patientDTO) {
+        patientService.updatePatient(patientDTO);
+        return new ResponseUtil(200,"patient Updated",null);
 
     }
-    @GetMapping("/{id}")
-    public ResponseUtil getPatientById(@PathVariable int id){
-        return new ResponseUtil(200,"Patient is found",patientService.getById(id));
-    }
-    @PutMapping(path = "update")
-    public ResponseUtil updatePatient(@RequestBody PatientDTO patientDTO){
-        patientService.update(patientDTO);
-        return new ResponseUtil(200,"Patient is updated",null);
-    }
     @DeleteMapping(path = "delete/{id}")
-    public ResponseUtil deletePatient(@PathVariable int id){
-        patientService.delete(id);
-        return new ResponseUtil(200,"Patient is deleted",null);
+    public ResponseUtil deletePatient(@PathVariable("id") int id) {
+        patientService.deletePatient(id);
+        return new ResponseUtil(200,"patient Deleted",null);
+    }
+    @GetMapping("getAll")
+    public ResponseUtil getAllPatients() {
+        return new ResponseUtil(
+                200,
+                "patient List",
+                patientService.getAllPatients());
+    }
+    @GetMapping("getPatientId")
+    public ResponseUtil getPatientsId() {
+        return new ResponseUtil(
+                200,
+                "Patient id List",
+                patientService.getPatientsId());
+    }
+    @GetMapping("getPatientById/{id}")
+    public ResponseUtil getPatientById(@PathVariable int id) {
+        PatientDTO patient = patientService.getPatientById(id);
+        return new ResponseUtil(200, "patient Found", patient);
+
     }
 }

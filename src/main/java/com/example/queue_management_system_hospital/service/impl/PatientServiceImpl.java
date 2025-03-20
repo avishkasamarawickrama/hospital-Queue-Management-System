@@ -20,39 +20,52 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void save(PatientDTO patientDTO){
-        if (patientRepo.existsById(patientDTO.getPatient_id()));
-        patientRepo.save(modelMapper.map(patientDTO, Patient.class));
-        throw new RuntimeException("patient already exists");
-
-    }
     @Override
-    public PatientDTO getById(int id){
-        Optional<Patient>optionalPatient = patientRepo.findById(id);
-        if (optionalPatient.isPresent()){
-            return modelMapper.map(optionalPatient.get(),PatientDTO.class);
+    public void addPatient(PatientDTO patientDTO) {
+        if (patientRepo.existsById(patientDTO.getPatient_id())) {
+            throw new RuntimeException("Patient already exists");
+        }
+        patientRepo.save(modelMapper.map(patientDTO, Patient.class));
+    }
 
+
+    @Override
+    public void updatePatient(PatientDTO patientDTO) {
+        if (!patientRepo.existsById(patientDTO.getPatient_id())) {
+            throw new RuntimeException("Patient does not exist");
         }
-        throw new RuntimeException("patient not found ");
+        patientRepo.save(modelMapper.map(patientDTO, Patient.class));
     }
-    public List<PatientDTO>getAll(){
-        return modelMapper.map(
-                patientRepo.findAll(),
-                new TypeToken<List<PatientDTO>>(){}.getType()
+
+
+
+    @Override
+    public void deletePatient(int id) {
+        patientRepo.deleteById(id);
+    }
+
+    @Override
+    public List<PatientDTO> getAllPatients() {
+        return modelMapper.map(patientRepo.findAll(),
+                new TypeToken<List<PatientDTO>>() {}.getType());
+    }
+
+    @Override
+    public List<Integer> getPatientsId() {
+        return patientRepo.getPatientsId();
+    }
+
+   /* @Override
+    public CustomerDTO getCustomerById(String id) {
+        return customerRepo.findNameById(id);
+    }*/
+
+    @Override
+    public PatientDTO getPatientById(int id) {
+        Patient patient = patientRepo.findById(id).orElseThrow(() ->
+                new RuntimeException("Patient does not exist")
         );
+        return modelMapper.map(patient, PatientDTO.class);
     }
-    public void update(PatientDTO patientDTO){
-        if (patientRepo.existsById(patientDTO.getPatient_id())){
-            patientRepo.save(
-                    modelMapper.map(patientDTO,Patient.class)
-            );
-        }
-        throw new RuntimeException("patient doesn't exists");
-    }
-    public void delete(int id){
-        if (patientRepo.existsById(id)){
-            patientRepo.deleteById(id);
-        }
-        throw new RuntimeException("patient doesn't exists");
-    }
+
 }

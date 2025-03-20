@@ -3,7 +3,10 @@ package com.example.queue_management_system_hospital.dto;
 import jakarta.persistence.Id;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 public class AppointmentDTO {
     @Id
@@ -11,17 +14,18 @@ public class AppointmentDTO {
     private int patient_id;
     private int doctor_id;
     private int department_id;
-    private Date appointment_date;
-    private Time appointment_time;
+    private LocalDate appointment_date;
+    private LocalTime appointment_time;
 
     private String status;
     private String priority;
     private int queue_number;
+    private List<AppointmentDTO>appointmentDetails;
 
     public AppointmentDTO() {
     }
 
-    public AppointmentDTO(int appointment_id, int patient_id, int doctor_id, int department_id, Date appointment_date, Time appointment_time, String status, String priority, int queue_number) {
+    public AppointmentDTO(int appointment_id, int patient_id, int doctor_id, int department_id, LocalDate appointment_date, LocalTime appointment_time, String status, String priority, int queue_number) {
         this.appointment_id = appointment_id;
         this.patient_id = patient_id;
         this.doctor_id = doctor_id;
@@ -65,19 +69,19 @@ public class AppointmentDTO {
         this.department_id = department_id;
     }
 
-    public Date getAppointment_date() {
+    public LocalDate getAppointment_date() {
         return appointment_date;
     }
 
-    public void setAppointment_date(Date appointment_date) {
+    public void setAppointment_date(LocalDate appointment_date) {
         this.appointment_date = appointment_date;
     }
 
-    public Time getAppointment_time() {
+    public LocalTime getAppointment_time() {
         return appointment_time;
     }
 
-    public void setAppointment_time(Time appointment_time) {
+    public void setAppointment_time(LocalTime appointment_time) {
         this.appointment_time = appointment_time;
     }
 
