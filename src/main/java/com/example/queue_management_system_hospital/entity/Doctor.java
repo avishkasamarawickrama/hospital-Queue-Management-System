@@ -19,9 +19,9 @@ public class Doctor {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+//    @ManyToOne
+//    @JoinColumn(name = "department_id")
+//    private Department department;
 
     private String specialization;
     private Time available_from;
@@ -35,11 +35,10 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(int doctor_id,String doctor_name, User user,Department department, String specialization, Time available_from, Time available_to, Double channeling_pay, List<Appointment> appointments) {
+    public Doctor(int doctor_id,String doctor_name, User user, String specialization, Time available_from, Time available_to, Double channeling_pay, List<Appointment> appointments) {
         this.doctor_id = doctor_id;
         this.doctor_name = doctor_name;
         this.user = user;
-        this.department = department;
         this.specialization = specialization;
         this.available_from = available_from;
         this.available_to = available_to;
@@ -72,14 +71,7 @@ public class Doctor {
         this.user = user;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-    public String getSpecialization() {
+     public String getSpecialization() {
         return specialization;
     }
 
