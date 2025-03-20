@@ -1,6 +1,7 @@
 package com.example.queue_management_system_hospital.dto;
 
 import java.sql.Time;
+import java.util.List;
 
 public class DoctorDTO {
     private int doctor_id;
@@ -10,16 +11,37 @@ public class DoctorDTO {
     private Time available_from;
     private Time available_to;
 
+    private Double channeling_pay;
+    private List<AppointmentDTO>appointmentDTO;
+
     public DoctorDTO() {
     }
 
-    public DoctorDTO(int doctor_id,String doctor_name, int user_id, String specialization, Time available_from, Time available_to) {
+    public DoctorDTO(int doctor_id,String doctor_name, int user_id, String specialization, Time available_from, Time available_to,double channeling_pay,List<AppointmentDTO>appointmentDTO) {
         this.doctor_id = doctor_id;
         this.doctor_name = doctor_name;
         this.user_id = user_id;
         this.specialization = specialization;
         this.available_from = available_from;
         this.available_to = available_to;
+        this.channeling_pay = channeling_pay;
+        this.appointmentDTO = appointmentDTO;
+    }
+
+    public Double getChanneling_pay() {
+        return channeling_pay;
+    }
+
+    public void setChanneling_pay(Double channeling_pay) {
+        this.channeling_pay = channeling_pay;
+    }
+
+    public List<AppointmentDTO> getAppointmentDTO() {
+        return appointmentDTO;
+    }
+
+    public void setAppointmentDTO(List<AppointmentDTO> appointmentDTO) {
+        this.appointmentDTO = appointmentDTO;
     }
 
     public String getDoctor_name() {

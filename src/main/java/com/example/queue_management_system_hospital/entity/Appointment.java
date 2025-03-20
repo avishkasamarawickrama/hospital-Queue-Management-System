@@ -23,9 +23,6 @@ public class Appointment {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
 
     @Column(name = "appointment_date")
     private LocalDate appointment_date;
@@ -33,28 +30,17 @@ public class Appointment {
     @Column(name = "appointment_time")
     private LocalTime appointment_time;
 
-//    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private String status;
-
-//    @Enumerated(EnumType.STRING)
-    @Column(name = "priority", nullable = false)
-    private String priority;
-
     @Column(name ="queue_number")
     private int queue_number;
 
     public Appointment() {
     }
-    public Appointment(int appointment_id, Patient patient, Doctor doctor, Department department, LocalDate appointment_date, LocalTime appointment_time, String status, String priority, int queue_number) {
+    public Appointment(int appointment_id, Patient patient, Doctor doctor, LocalDate appointment_date, LocalTime appointment_time, int queue_number) {
         this.appointment_id = appointment_id;
         this.patient = patient;
         this.doctor = doctor;
-        this.department = department;
         this.appointment_date = appointment_date;
         this.appointment_time = appointment_time;
-        this.status = status;
-        this.priority = priority;
         this.queue_number = queue_number;}
 
     public int getAppointment_id() {
@@ -81,13 +67,6 @@ public class Appointment {
         this.doctor = doctor;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public LocalDate getAppointment_date() {
         return appointment_date;
@@ -105,21 +84,6 @@ public class Appointment {
         this.appointment_time = appointment_time;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
 
     public int getQueue_number() {
         return queue_number;

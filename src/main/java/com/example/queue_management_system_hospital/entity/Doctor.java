@@ -1,8 +1,10 @@
 package com.example.queue_management_system_hospital.entity;
 
+import com.example.queue_management_system_hospital.dto.DoctorDTO;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "doctor")
@@ -25,10 +27,15 @@ public class Doctor {
     private Time available_from;
     private Time available_to;
 
+    private Double Channeling_pay;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Appointment> appointments;
+
     public Doctor() {
     }
 
-    public Doctor(int doctor_id,String doctor_name, User user,Department department, String specialization, Time available_from, Time available_to) {
+    public Doctor(int doctor_id,String doctor_name, User user,Department department, String specialization, Time available_from, Time available_to, Double channeling_pay, List<Appointment> appointments) {
         this.doctor_id = doctor_id;
         this.doctor_name = doctor_name;
         this.user = user;
@@ -36,6 +43,8 @@ public class Doctor {
         this.specialization = specialization;
         this.available_from = available_from;
         this.available_to = available_to;
+        Channeling_pay = channeling_pay;
+        this.appointments = appointments;
     }
 
 
@@ -94,5 +103,19 @@ public class Doctor {
         this.available_to = available_to;
     }
 
+    public Double getChanneling_pay() {
+        return Channeling_pay;
+    }
 
+    public void setChanneling_pay(Double channeling_pay) {
+        Channeling_pay = channeling_pay;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
 }

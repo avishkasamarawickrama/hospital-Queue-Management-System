@@ -13,28 +13,32 @@ public class AppointmentDTO {
     private int appointment_id;
     private int patient_id;
     private int doctor_id;
-    private int department_id;
     private LocalDate appointment_date;
     private LocalTime appointment_time;
-
-    private String status;
-    private String priority;
     private int queue_number;
-    private List<AppointmentDTO>appointmentDetails;
+    private List<AppointmentDetailDTO> appointmentDetails;  // Optional: if you have details for the appointment
 
     public AppointmentDTO() {
     }
 
-    public AppointmentDTO(int appointment_id, int patient_id, int doctor_id, int department_id, LocalDate appointment_date, LocalTime appointment_time, String status, String priority, int queue_number) {
+    public AppointmentDTO(int appointment_id, int patient_id, int doctor_id, int department_id, LocalDate appointment_date, LocalTime appointment_time, String status, String priority, int queue_number, List<AppointmentDetailDTO> appointmentDetails) {
         this.appointment_id = appointment_id;
         this.patient_id = patient_id;
         this.doctor_id = doctor_id;
-        this.department_id = department_id;
+
         this.appointment_date = appointment_date;
         this.appointment_time = appointment_time;
-        this.status = status;
-        this.priority = priority;
+
         this.queue_number = queue_number;
+        this.appointmentDetails = appointmentDetails;
+    }
+
+    public List<AppointmentDetailDTO> getAppointmentDetails() {
+        return appointmentDetails;
+    }
+
+    public void setAppointmentDetails(List<AppointmentDetailDTO> appointmentDetails) {
+        this.appointmentDetails = appointmentDetails;
     }
 
     public int getAppointment_id() {
@@ -61,14 +65,6 @@ public class AppointmentDTO {
         this.doctor_id = doctor_id;
     }
 
-    public int getDepartment_id() {
-        return department_id;
-    }
-
-    public void setDepartment_id(int department_id) {
-        this.department_id = department_id;
-    }
-
     public LocalDate getAppointment_date() {
         return appointment_date;
     }
@@ -85,21 +81,6 @@ public class AppointmentDTO {
         this.appointment_time = appointment_time;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
 
     public int getQueue_number() {
         return queue_number;
