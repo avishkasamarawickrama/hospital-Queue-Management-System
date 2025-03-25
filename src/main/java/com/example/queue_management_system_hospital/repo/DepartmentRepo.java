@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface DepartmentRepo extends JpaRepository<Department,Integer> {
     @Query("SELECT d.department_id From Department d")
-    List<Integer> getDepartmentsId();
-    @Query("SELECT d.department_id FROM Department d") // Corrected JPQL query
     List<Integer> findAllDepartmentsIds();
 
     //    @Query("SELECT i.name,i.price,i.quantity FROM Item i WHERE i.code = :code")

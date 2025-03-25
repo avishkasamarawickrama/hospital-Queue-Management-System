@@ -57,8 +57,8 @@ public class WebSecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
 
+                        .requestMatchers("/api/v1/department/save").hasRole("ADMIN") // Require ADMIN role
                         .anyRequest().authenticated()
-
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

@@ -62,9 +62,17 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
+//    private Claims getClaimsFromJwtToken(String token) {
+//        return Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody();
+//    }
     private Claims getClaimsFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
+
 
 }
 

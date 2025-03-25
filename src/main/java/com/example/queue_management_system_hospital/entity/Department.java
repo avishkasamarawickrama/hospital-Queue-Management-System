@@ -35,4 +35,12 @@ public class Department {
     public void setDepartment_name(String department_name) {
         this.department_name = department_name;
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "department_id=" + department_id +
+                ", department_name='" + department_name + '\'' +
+                '}';
+    }
 }
