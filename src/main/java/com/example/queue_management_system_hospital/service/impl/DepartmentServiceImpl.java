@@ -5,6 +5,10 @@ import com.example.queue_management_system_hospital.dto.DoctorDTO;
 import com.example.queue_management_system_hospital.entity.Department;
 import com.example.queue_management_system_hospital.repo.DepartmentRepo;
 import com.example.queue_management_system_hospital.service.DepartmentService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @PersistenceContext
+    private EntityManager entityManager; // Inject EntityManager
+
     @Override
     public void addDepartment(DepartmentDTO departmentDTO) {
         if (departmentRepo.existsById(departmentDTO.getDepartment_id())){
@@ -29,6 +36,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         departmentRepo.save(modelMapper.map(departmentDTO, Department.class));
 
+    }
+    @Transactional
+    public Department updateDepartment(int id, Department department) {
+        Department existingDepartment = departmentRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Department not found"));
+
+        // Update fields
+        existingDepartment.setDepartment_name(department.getDepartment_name());
+
+        return entityManager.merge(existingDepartment); // Use merge correctly
     }
 
     @Override

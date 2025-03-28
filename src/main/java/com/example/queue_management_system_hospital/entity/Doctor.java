@@ -4,6 +4,7 @@ import com.example.queue_management_system_hospital.dto.DoctorDTO;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -19,13 +20,12 @@ public class Doctor {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "department_id")
-//    private Department department;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
-    private String specialization;
-    private Time available_from;
-    private Time available_to;
+    private LocalTime available_from;
+    private LocalTime available_to;
 
     private Double Channeling_pay;
 
@@ -35,11 +35,11 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(int doctor_id,String doctor_name, User user, String specialization, Time available_from, Time available_to, Double channeling_pay, List<Appointment> appointments) {
+    public Doctor(int doctor_id,String doctor_name, User user,Department department,  LocalTime available_from, LocalTime available_to, Double channeling_pay, List<Appointment> appointments) {
         this.doctor_id = doctor_id;
         this.doctor_name = doctor_name;
         this.user = user;
-        this.specialization = specialization;
+        this.department = department;
         this.available_from = available_from;
         this.available_to = available_to;
         Channeling_pay = channeling_pay;
@@ -71,27 +71,20 @@ public class Doctor {
         this.user = user;
     }
 
-     public String getSpecialization() {
-        return specialization;
-    }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public Time getAvailable_from() {
+     public LocalTime getAvailable_from() {
         return available_from;
     }
 
-    public void setAvailable_from(Time available_from) {
+    public void setAvailable_from(LocalTime available_from) {
         this.available_from = available_from;
     }
 
-    public Time getAvailable_to() {
+    public LocalTime getAvailable_to() {
         return available_to;
     }
 
-    public void setAvailable_to(Time available_to) {
+    public void setAvailable_to(LocalTime available_to) {
         this.available_to = available_to;
     }
 
@@ -109,5 +102,13 @@ public class Doctor {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
