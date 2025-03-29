@@ -1,92 +1,157 @@
 package com.example.queue_management_system_hospital.dto;
 
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
+import java.util.Objects;
+
+@Data
 
 public class AppointmentDTO {
-    @Id
-    private int appointment_id;
-    private int patient_id;
-    private int doctor_id;
-    private LocalDate appointment_date;
-    private LocalTime appointment_time;
-    private int queue_number;
-    private List<AppointmentDetailDTO> appointmentDetails;  // Optional: if you have details for the appointment
+    private int appointmentId;
+    private Long doctorId;
+    private Long patientId;
+    private LocalDate appointmentDate;
+    private LocalTime appointmentTime;
+    private Integer queueNumber;
+    private AppointmentStatus status;  // PENDING, CONFIRMED, COMPLETED, CANCELLED
+    private PaymentStatus paymentStatus;  // PENDING, PAID, REFUNDED
+    private Double channelingFee;
+    private String departmentName;
+
+    public enum AppointmentStatus {
+        PENDING, CONFIRMED, COMPLETED, CANCELLED
+    }
+
+    public enum PaymentStatus {
+        PENDING, PAID, REFUNDED
+    }
 
     public AppointmentDTO() {
     }
 
-    public AppointmentDTO(int appointment_id, int patient_id, int doctor_id, int department_id, LocalDate appointment_date, LocalTime appointment_time, String status, String priority, int queue_number, List<AppointmentDetailDTO> appointmentDetails) {
-        this.appointment_id = appointment_id;
-        this.patient_id = patient_id;
-        this.doctor_id = doctor_id;
-
-        this.appointment_date = appointment_date;
-        this.appointment_time = appointment_time;
-
-        this.queue_number = queue_number;
-        this.appointmentDetails = appointmentDetails;
+    public AppointmentDTO(int appointmentId, Long doctorId, Long patientId, LocalDate appointmentDate, LocalTime appointmentTime, Integer queueNumber, AppointmentStatus status, PaymentStatus paymentStatus, Double channelingFee, String departmentName) {
+        this.appointmentId = appointmentId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
+        this.queueNumber = queueNumber;
+        this.status = status;
+        this.paymentStatus = paymentStatus;
+        this.channelingFee = channelingFee;
+        this.departmentName = departmentName;
     }
 
-    public List<AppointmentDetailDTO> getAppointmentDetails() {
-        return appointmentDetails;
+    public int getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setAppointmentDetails(List<AppointmentDetailDTO> appointmentDetails) {
-        this.appointmentDetails = appointmentDetails;
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
-    public int getAppointment_id() {
-        return appointment_id;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public void setAppointment_id(int appointment_id) {
-        this.appointment_id = appointment_id;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public int getPatient_id() {
-        return patient_id;
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
-    public int getDoctor_id() {
-        return doctor_id;
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public LocalDate getAppointment_date() {
-        return appointment_date;
+    public LocalTime getAppointmentTime() {
+        return appointmentTime;
     }
 
-    public void setAppointment_date(LocalDate appointment_date) {
-        this.appointment_date = appointment_date;
+    public void setAppointmentTime(LocalTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 
-    public LocalTime getAppointment_time() {
-        return appointment_time;
+    public Integer getQueueNumber() {
+        return queueNumber;
     }
 
-    public void setAppointment_time(LocalTime appointment_time) {
-        this.appointment_time = appointment_time;
+    public void setQueueNumber(Integer queueNumber) {
+        this.queueNumber = queueNumber;
     }
 
-
-    public int getQueue_number() {
-        return queue_number;
+    public AppointmentStatus getStatus() {
+        return status;
     }
 
-    public void setQueue_number(int queue_number) {
-        this.queue_number = queue_number;
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public Double getChannelingFee() {
+        return channelingFee;
+    }
+
+    public void setChannelingFee(Double channelingFee) {
+        this.channelingFee = channelingFee;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppointmentDTO that = (AppointmentDTO) o;
+        return appointmentId == that.appointmentId && Objects.equals(doctorId, that.doctorId) && Objects.equals(patientId, that.patientId) && Objects.equals(appointmentDate, that.appointmentDate) && Objects.equals(appointmentTime, that.appointmentTime) && Objects.equals(queueNumber, that.queueNumber) && status == that.status && paymentStatus == that.paymentStatus && Objects.equals(channelingFee, that.channelingFee) && Objects.equals(departmentName, that.departmentName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(appointmentId, doctorId, patientId, appointmentDate, appointmentTime, queueNumber, status, paymentStatus, channelingFee, departmentName);
+    }
+
+    @Override
+    public String toString() {
+        return "AppointmentDTO{" +
+                "appointmentId=" + appointmentId +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", appointmentDate=" + appointmentDate +
+                ", appointmentTime=" + appointmentTime +
+                ", queueNumber=" + queueNumber +
+                ", status=" + status +
+                ", paymentStatus=" + paymentStatus +
+                ", channelingFee=" + channelingFee +
+                ", departmentName='" + departmentName + '\'' +
+                '}';
     }
 }

@@ -1,62 +1,78 @@
 package com.example.queue_management_system_hospital.entity;
 
 import jakarta.persistence.*;
-
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 
+@Data
 @Entity
 @Table(name = "appointment")
 public class Appointment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int appointment_id;
+    private int appointmentId;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
 
-    @Column(name = "appointment_date")
-    private LocalDate appointment_date;
+    @Column(name = "appointment_date", nullable = false)
+    private LocalDate appointmentDate;
 
-    @Column(name = "appointment_time")
-    private LocalTime appointment_time;
+    @Column(name = "appointment_time", nullable = false)
+    private LocalTime appointmentTime;
 
-    @Column(name ="queue_number")
-    private int queue_number;
+    @Column(name = "queue_number")
+    private Integer queueNumber;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status;
+
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
+    @Column(name = "channeling_fee")
+    private Double channelingFee;
+
+    public enum AppointmentStatus {
+        PENDING, CONFIRMED, COMPLETED, CANCELLED
+    }
+
+    public enum PaymentStatus {
+        PENDING, PAID, REFUNDED
+    }
 
     public Appointment() {
     }
-    public Appointment(int appointment_id, Patient patient, Doctor doctor, LocalDate appointment_date, LocalTime appointment_time, int queue_number) {
-        this.appointment_id = appointment_id;
-        this.patient = patient;
+
+    public Appointment(int appointmentId, Doctor doctor, Patient patient, LocalDate appointmentDate, LocalTime appointmentTime, Integer queueNumber, AppointmentStatus status, PaymentStatus paymentStatus, Double channelingFee) {
+        this.appointmentId = appointmentId;
         this.doctor = doctor;
-        this.appointment_date = appointment_date;
-        this.appointment_time = appointment_time;
-        this.queue_number = queue_number;}
-
-    public int getAppointment_id() {
-        return appointment_id;
-    }
-
-    public void setAppointment_id(int appointment_id) {
-        this.appointment_id = appointment_id;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
         this.patient = patient;
+        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
+        this.queueNumber = queueNumber;
+        this.status = status;
+        this.paymentStatus = paymentStatus;
+        this.channelingFee = channelingFee;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public Doctor getDoctor() {
@@ -67,31 +83,59 @@ public class Appointment {
         this.doctor = doctor;
     }
 
-
-    public LocalDate getAppointment_date() {
-        return appointment_date;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setAppointment_date(LocalDate appoinment_date) {
-        this.appointment_date = appoinment_date;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public LocalTime getAppointment_time() {
-        return appointment_time;
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setAppointment_time(LocalTime appointment_time) {
-        this.appointment_time = appointment_time;
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-
-    public int getQueue_number() {
-        return queue_number;
+    public LocalTime getAppointmentTime() {
+        return appointmentTime;
     }
 
-    public void setQueue_number(int queue_number) {
-        this.queue_number = queue_number;
+    public void setAppointmentTime(LocalTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    public Integer getQueueNumber() {
+        return queueNumber;
+    }
+
+    public void setQueueNumber(Integer queueNumber) {
+        this.queueNumber = queueNumber;
+    }
+
+    public AppointmentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public Double getChannelingFee() {
+        return channelingFee;
+    }
+
+    public void setChannelingFee(Double channelingFee) {
+        this.channelingFee = channelingFee;
     }
 }
-
-

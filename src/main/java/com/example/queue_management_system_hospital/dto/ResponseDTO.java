@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
-
+@Data
 @Component
 public class ResponseDTO {
     private int code;

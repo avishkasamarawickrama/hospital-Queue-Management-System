@@ -1,47 +1,53 @@
 package com.example.queue_management_system_hospital.dto;
 
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 
 public class AppointmentDetailDTO {
-    @Id
-    private Long detailId;
-    private String procedure;
+    private int appDetailsId;
+    private Long appointmentId;
+    private String procedureName;
     private String notes;
-    private int appointment_id;
+    private String diagnosis;
+    private String prescription;
 
     public AppointmentDetailDTO() {
-
     }
 
-    public AppointmentDetailDTO(Long detailId, String procedure, String notes,int appointment_id) {
-        this.detailId = detailId;
-        this.procedure = procedure;
+    public AppointmentDetailDTO(int appDetailsId, Long appointmentId, String procedureName, String notes, String diagnosis, String prescription) {
+        this.appDetailsId = appDetailsId;
+        this.appointmentId = appointmentId;
+        this.procedureName = procedureName;
         this.notes = notes;
-        this.appointment_id = appointment_id;
+        this.diagnosis = diagnosis;
+        this.prescription = prescription;
     }
 
-    public int getAppointment_id() {
-        return appointment_id;
+    public int getAppDetailsId() {
+        return appDetailsId;
     }
 
-    public void setAppointment_id(int appointment_id) {
-        this.appointment_id = appointment_id;
+    public void setAppDetailsId(int appDetailsId) {
+        this.appDetailsId = appDetailsId;
     }
 
-    public Long getDetailId() {
-        return detailId;
+    public Long getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setDetailId(Long detailId) {
-        this.detailId = detailId;
+    public void setAppointmentId(Long appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
-    public String getProcedure() {
-        return procedure;
+    public String getProcedureName() {
+        return procedureName;
     }
 
-    public void setProcedure(String procedure) {
-        this.procedure = procedure;
+    public void setProcedureName(String procedureName) {
+        this.procedureName = procedureName;
     }
 
     public String getNotes() {
@@ -50,5 +56,33 @@ public class AppointmentDetailDTO {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
+    }
+
+    @Override
+    public String toString() {
+        return "AppointmentDetailDTO{" +
+                "appDetailsId=" + appDetailsId +
+                ", appointmentId=" + appointmentId +
+                ", procedureName='" + procedureName + '\'' +
+                ", notes='" + notes + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", prescription='" + prescription + '\'' +
+                '}';
     }
 }

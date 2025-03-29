@@ -14,58 +14,35 @@ import java.util.Optional;
 
 @Service
 public class PatientServiceImpl implements PatientService {
-    @Autowired
-    private PatientRepo patientRepo;
 
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Override
     public void addPatient(PatientDTO patientDTO) {
-        if (patientRepo.existsById(patientDTO.getPatient_id())) {
-            throw new RuntimeException("Patient already exists");
-        }
-        patientRepo.save(modelMapper.map(patientDTO, Patient.class));
-    }
 
+    }
 
     @Override
     public void updatePatient(PatientDTO patientDTO) {
-        if (!patientRepo.existsById(patientDTO.getPatient_id())) {
-            throw new RuntimeException("Patient does not exist");
-        }
-        patientRepo.save(modelMapper.map(patientDTO, Patient.class));
+
     }
-
-
 
     @Override
     public void deletePatient(int id) {
-        patientRepo.deleteById(id);
+
     }
 
     @Override
     public List<PatientDTO> getAllPatients() {
-        return modelMapper.map(patientRepo.findAll(),
-                new TypeToken<List<PatientDTO>>() {}.getType());
+        return List.of();
     }
 
     @Override
     public List<Integer> getPatientsId() {
-        return patientRepo.getPatientsId();
+        return List.of();
     }
-
-   /* @Override
-    public CustomerDTO getCustomerById(String id) {
-        return customerRepo.findNameById(id);
-    }*/
 
     @Override
     public PatientDTO getPatientById(int id) {
-        Patient patient = patientRepo.findById(id).orElseThrow(() ->
-                new RuntimeException("Patient does not exist")
-        );
-        return modelMapper.map(patient, PatientDTO.class);
+        return null;
     }
-
 }

@@ -5,16 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-public class AuthDTO {
-    private String email;
-    private String token;
 
-    public AuthDTO() {
+class AuthRequestDTO {
+    private String email;
+    private String password;
+
+    public AuthRequestDTO() {
     }
 
-    public AuthDTO(String email, String token) {
+    public AuthRequestDTO(String email, String password) {
         this.email = email;
-        this.token = token;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -25,19 +26,19 @@ public class AuthDTO {
         this.email = email;
     }
 
-    public String getToken() {
-        return token;
+    public String getPassword() {
+        return password;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "AuthDTO{" +
+        return "AuthRequestDTO{" +
                 "email='" + email + '\'' +
-                ", token='" + token + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

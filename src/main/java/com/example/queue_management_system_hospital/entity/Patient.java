@@ -1,42 +1,67 @@
 package com.example.queue_management_system_hospital.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+
+@Data
 @Entity
 @Table(name = "patient")
 public class Patient {
     @Id
-    private int patient_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int patientId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    private Date date_of_birth;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "gender")
     private String gender;
+
+    @Column(name = "address")
     private String address;
-    private String phone_number;
-    private String email;
 
-    public Patient(){}
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 
-    public Patient(int patient_id, User user, Date date_of_birth, String gender, String address, String phone_number, String email) {
-        this.patient_id = patient_id;
+    @Column(name = "emergency_contact")
+    private String emergencyContact;
+
+    @Column(name = "blood_group")
+    private String bloodGroup;
+
+    @Column(name = "medical_history", length = 2000)
+    private String medicalHistory;
+
+    public Patient() {
+    }
+
+    public Patient(int patientId, User user, LocalDate dateOfBirth, String gender, String address, String phoneNumber, String emergencyContact, String bloodGroup, String medicalHistory) {
+        this.patientId = patientId;
         this.user = user;
-        this.date_of_birth = date_of_birth;
+        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.address = address;
-        this.phone_number = phone_number;
-        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.emergencyContact = emergencyContact;
+        this.bloodGroup = bloodGroup;
+        this.medicalHistory = medicalHistory;
     }
 
-    public int getPatient_id() {
-        return patient_id;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public User getUser() {
@@ -47,12 +72,12 @@ public class Patient {
         this.user = user;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getGender() {
@@ -71,19 +96,35 @@ public class Patient {
         this.address = address;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmergencyContact() {
+        return emergencyContact;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(String medicalHistory) {
+        this.medicalHistory = medicalHistory;
     }
 }

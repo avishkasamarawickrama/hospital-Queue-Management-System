@@ -5,39 +5,40 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 
+@Data
 @Entity
-@Table(name = "systemuser")
-public class User implements Serializable {
+@Table(name = "user")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uid;
-    @Column(unique = true)
+    private UUID userId;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
-    private String name;
-    private String role;
 
-    public User() {
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    public enum UserRole {
+        ADMIN, DOCTOR, PATIENT, STAFF
     }
 
-    public User(UUID uid, String email, String password, String name, String role) {
-        this.uid = uid;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.role = role;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public UUID getUid() {
-        return uid;
-    }
-
-    public void setUid(UUID uid) {
-        this.uid = uid;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -56,19 +57,33 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
+
+
+    public User() {
+    }
+
+    public User(UUID userId, String email, String password, String fullName, UserRole role) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.role = role;
+    }
+
+
 }

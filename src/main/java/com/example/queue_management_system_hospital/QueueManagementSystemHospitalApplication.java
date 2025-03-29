@@ -11,6 +11,7 @@ public class QueueManagementSystemHospitalApplication {
     public static void main(String[] args) {
         SpringApplication.run(QueueManagementSystemHospitalApplication.class, args);
     }
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

@@ -1,8 +1,10 @@
 package com.example.queue_management_system_hospital.Controller;
 
 import com.example.queue_management_system_hospital.dto.DepartmentDTO;
+import com.example.queue_management_system_hospital.service.DepartmentService;
 import com.example.queue_management_system_hospital.service.impl.DepartmentServiceImpl;
 import com.example.queue_management_system_hospital.util.ResponseUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -10,39 +12,60 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "api/v1/department")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class DepartmentController {
     @Autowired
-    private DepartmentServiceImpl departmentService;
+    private DepartmentService departmentService;
 
-    @PostMapping( value = "save",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil saveDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        departmentService.addDepartment(departmentDTO);
-        return new ResponseUtil(201,"Department Saved",null);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil saveDepartment(@RequestBody DepartmentDTO department) {
+        if (department != null) {
+            try {
+                departmentService.addDepartment(department);
+                return new ResponseUtil(200,"Department Saved",null);
+            } catch (Exception e) {
+                return new ResponseUtil(500,"Department not saved",null);
+            }
+        } else {
+            return new ResponseUtil(500,"Department not saved",null);
+        }
     }
 
-    @PutMapping(value = "update",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil updateDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        departmentService.updateDepartment(departmentDTO);
-        return new ResponseUtil(200,"Department Updated",null);
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateDepartment(@RequestBody DepartmentDTO department) {
+        if (department != null) {
+            try {
+                departmentService.updateDepartment(department);
+                return new ResponseUtil(200,"Department Updated",null);
+            } catch (Exception e) {
+                return new ResponseUtil(500,"Department not updated",null);
+            }
+        } else {
+            return new ResponseUtil(500,"Department not updated",null);
+        }
     }
-    @DeleteMapping(path = "delete/{id}")
+
+    @DeleteMapping(path = "/{id}")
     public ResponseUtil deleteDepartment(@PathVariable("id") int id) {
-        departmentService.deleteDepartment(id);
-        return new ResponseUtil(200,"department Deleted",null);
+        try {
+            departmentService.deleteDepartment(id);
+            return new ResponseUtil(200,"Department Deleted",null);
+        } catch (Exception e) {
+            return new ResponseUtil(500,"Department not deleted",null);
+        }
     }
-    @GetMapping("getAll")
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil getAllDepartments() {
         return new ResponseUtil(200,"Get All departments",departmentService.getAllDepartments());
     }
-    @GetMapping("getDepartmentsIds")
-    public ResponseUtil getDepartmentsIds() {
-        return new ResponseUtil(200,"Get All departments ids",departmentService.getDepartmentsIds());
-    }
-    @GetMapping("getDepartmentById/{id}")
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil getDepartmentById(@PathVariable int id) {
-        DepartmentDTO department = departmentService.getDepartmentById(id);
-        return new ResponseUtil(200, "Department found", department);
+        try {
+            return new ResponseUtil(200,"Get Department by Id",departmentService.getDepartmentById(id));
+        } catch (Exception e) {
+            return new ResponseUtil(500,"Department not found",null);
+        }
     }
-
-
 }

@@ -10,11 +10,4 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PatientRepo extends JpaRepository<Patient,Integer> {
-    @Query("SELECT p.patient_id From Patient p")
-    List<Integer> getPatientsId();
-
-    @Query("SELECT p.patient_id FROM Patient p WHERE p.patient_id = :patient_id")
-    PatientDTO findNameById(@Param("patient_id") int patient_id);
-
-}
+public interface PatientRepo extends JpaRepository<Patient,Integer> {}

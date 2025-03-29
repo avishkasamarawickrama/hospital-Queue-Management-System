@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
-public interface AppointmentDetailRepo extends JpaRepository<AppointmentDetail, Long> {
-}
+public interface AppointmentDetailRepo extends JpaRepository<AppointmentDetail, Integer> {}

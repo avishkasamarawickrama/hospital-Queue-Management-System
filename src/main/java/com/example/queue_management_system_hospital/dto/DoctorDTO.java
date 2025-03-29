@@ -1,97 +1,139 @@
 package com.example.queue_management_system_hospital.dto;
 
-import java.sql.Time;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalTime;
-import java.util.List;
+import java.util.UUID;
+
+@Data
 
 public class DoctorDTO {
-    private int doctor_id;
-    private String doctor_name;
-    private int user_id;
-
-    private int department_id;
-
-    private LocalTime available_from;
-    private LocalTime available_to;
-
-    private Double channeling_pay;
-    private List<AppointmentDTO>appointmentDTO;
+    private int doctorId;
+    private UUID userId;
+    private String fullName;
+    private Long departmentId;
+    private String departmentName;
+    private String specialization;
+    private LocalTime availableFrom;
+    private LocalTime availableTo;
+    private Double channelingFee;
+    private Integer maxAppointmentsPerDay;
+    private Boolean isActive;
+    private Integer todayAppointmentCount;  // Derived field
 
     public DoctorDTO() {
     }
 
-    public DoctorDTO(int doctor_id,String doctor_name, int user_id,int department_id, String specialization, LocalTime available_from, LocalTime available_to,double channeling_pay,List<AppointmentDTO>appointmentDTO) {
-        this.doctor_id = doctor_id;
-        this.doctor_name = doctor_name;
-        this.user_id = user_id;
-        this.department_id = department_id;
-        this.available_from = available_from;
-        this.available_to = available_to;
-        this.channeling_pay = channeling_pay;
-        this.appointmentDTO = appointmentDTO;
+    public DoctorDTO(int doctorId, UUID userId, String fullName, Long departmentId, String departmentName, String specialization, LocalTime availableFrom, LocalTime availableTo, Double channelingFee, Integer maxAppointmentsPerDay, Boolean isActive, Integer todayAppointmentCount) {
+        this.doctorId = doctorId;
+        this.userId = userId;
+        this.fullName = fullName;
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.specialization = specialization;
+        this.availableFrom = availableFrom;
+        this.availableTo = availableTo;
+        this.channelingFee = channelingFee;
+        this.maxAppointmentsPerDay = maxAppointmentsPerDay;
+        this.isActive = isActive;
+        this.todayAppointmentCount = todayAppointmentCount;
     }
 
-    public Double getChanneling_pay() {
-        return channeling_pay;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setChanneling_pay(Double channeling_pay) {
-        this.channeling_pay = channeling_pay;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public List<AppointmentDTO> getAppointmentDTO() {
-        return appointmentDTO;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setAppointmentDTO(List<AppointmentDTO> appointmentDTO) {
-        this.appointmentDTO = appointmentDTO;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
-    public String getDoctor_name() {
-        return doctor_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setDoctor_name(String doctor_name) {
-        this.doctor_name = doctor_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public int getDoctor_id() {
-        return doctor_id;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public int getDepartment_id() {
-        return department_id;
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public void setDepartment_id(int department_id) {
-        this.department_id = department_id;
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 
-    public LocalTime getAvailable_from() {
-        return available_from;
+    public LocalTime getAvailableFrom() {
+        return availableFrom;
     }
 
-    public void setAvailable_from(LocalTime available_from) {
-        this.available_from = available_from;
+    public void setAvailableFrom(LocalTime availableFrom) {
+        this.availableFrom = availableFrom;
     }
 
-    public LocalTime getAvailable_to() {
-        return available_to;
+    public LocalTime getAvailableTo() {
+        return availableTo;
     }
 
-    public void setAvailable_to(LocalTime available_to) {
-        this.available_to = available_to;
+    public void setAvailableTo(LocalTime availableTo) {
+        this.availableTo = availableTo;
+    }
+
+    public Double getChannelingFee() {
+        return channelingFee;
+    }
+
+    public void setChannelingFee(Double channelingFee) {
+        this.channelingFee = channelingFee;
+    }
+
+    public Integer getMaxAppointmentsPerDay() {
+        return maxAppointmentsPerDay;
+    }
+
+    public void setMaxAppointmentsPerDay(Integer maxAppointmentsPerDay) {
+        this.maxAppointmentsPerDay = maxAppointmentsPerDay;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public Integer getTodayAppointmentCount() {
+        return todayAppointmentCount;
+    }
+
+    public void setTodayAppointmentCount(Integer todayAppointmentCount) {
+        this.todayAppointmentCount = todayAppointmentCount;
     }
 }

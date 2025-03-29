@@ -32,12 +32,14 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String authorization = httpServletRequest.getHeader("Authorization");
         String token = null;
-        String email =null;
+        String email = null;
 
-        if (null != authorization && authorization.startsWith("Bearer")){
-            token =authorization.substring(7);
-            email =jwtUtil.getUsernameFromToken(token);
-            Claims claims =jwtUtil.getUserRoleCodeFromToken(token);
+
+        if (null != authorization && authorization.startsWith("Bearer ")) {
+
+            token = authorization.substring(7);
+            email = jwtUtil.getUserNameFromToken(token);
+            Claims claims=jwtUtil.getUserRoleCodeFromToken(token);
             httpServletRequest.setAttribute("email", email);
             httpServletRequest.setAttribute("role", claims.get("role"));
         }
@@ -62,18 +64,8 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-//    private Claims getClaimsFromJwtToken(String token) {
-//        return Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody();
-//    }
     private Claims getClaimsFromJwtToken(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(secretKey.getBytes())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        return Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody();
     }
 
-
 }
-
-

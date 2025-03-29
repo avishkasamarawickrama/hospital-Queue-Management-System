@@ -1,52 +1,72 @@
 package com.example.queue_management_system_hospital.dto;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Data
 
 public class PatientDTO {
-    private int patient_id;
-    private int user_id;
-    private Date date_of_birth;
+    private int patientId;
+    private UUID userId;
+    private String fullName;
+    private LocalDate dateOfBirth;
     private String gender;
     private String address;
-    private String phone_number;
-    private String email;
+    private String phoneNumber;
+    private String emergencyContact;
+    private String bloodGroup;
+    private String medicalHistory;
 
     public PatientDTO() {
-
     }
 
-    public PatientDTO(int patient_id, int user_id, Date date_of_birth, String gender, String address, String phone_number, String email) {
-        this.patient_id = patient_id;
-        this.user_id = user_id;
-        this.date_of_birth = date_of_birth;
+    public PatientDTO(int patientId, UUID userId, String fullName, LocalDate dateOfBirth, String gender, String address, String phoneNumber, String emergencyContact, String bloodGroup, String medicalHistory) {
+        this.patientId = patientId;
+        this.userId = userId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.address = address;
-        this.phone_number = phone_number;
-        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.emergencyContact = emergencyContact;
+        this.bloodGroup = bloodGroup;
+        this.medicalHistory = medicalHistory;
     }
 
-    public int getPatient_id() {
-        return patient_id;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getGender() {
@@ -65,19 +85,35 @@ public class PatientDTO {
         this.address = address;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmergencyContact() {
+        return emergencyContact;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(String medicalHistory) {
+        this.medicalHistory = medicalHistory;
     }
 }

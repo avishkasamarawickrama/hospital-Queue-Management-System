@@ -1,66 +1,73 @@
 package com.example.queue_management_system_hospital.entity;
 
-import com.example.queue_management_system_hospital.dto.DoctorDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 
+
+@Data
 @Entity
 @Table(name = "doctor")
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int doctor_id;
-
-    private String doctor_name;
+    private int doctorId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    private LocalTime available_from;
-    private LocalTime available_to;
+    @Column(name = "specialization")
+    private String specialization;
 
-    private Double Channeling_pay;
+    @Column(name = "available_from")
+    private LocalTime availableFrom;
+
+    @Column(name = "available_to")
+    private LocalTime availableTo;
+
+    @Column(name = "channeling_fee", nullable = false)
+    private Double channelingFee;
+
+    @Column(name = "max_appointments_per_day")
+    private Integer maxAppointmentsPerDay;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
     public Doctor() {
     }
 
-    public Doctor(int doctor_id,String doctor_name, User user,Department department,  LocalTime available_from, LocalTime available_to, Double channeling_pay, List<Appointment> appointments) {
-        this.doctor_id = doctor_id;
-        this.doctor_name = doctor_name;
+    public Doctor(int doctorId, User user, Department department, String specialization, LocalTime availableFrom, LocalTime availableTo, Double channelingFee, Integer maxAppointmentsPerDay, List<Appointment> appointments, Boolean isActive) {
+        this.doctorId = doctorId;
         this.user = user;
         this.department = department;
-        this.available_from = available_from;
-        this.available_to = available_to;
-        Channeling_pay = channeling_pay;
+        this.specialization = specialization;
+        this.availableFrom = availableFrom;
+        this.availableTo = availableTo;
+        this.channelingFee = channelingFee;
+        this.maxAppointmentsPerDay = maxAppointmentsPerDay;
         this.appointments = appointments;
+        this.isActive = isActive;
     }
 
-
-    public String getDoctor_name() {
-        return doctor_name;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor_name(String doctor_name) {
-        this.doctor_name = doctor_name;
-    }
-
-    public int getDoctor_id() {
-        return doctor_id;
-    }
-
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
     public User getUser() {
@@ -71,29 +78,52 @@ public class Doctor {
         this.user = user;
     }
 
-
-     public LocalTime getAvailable_from() {
-        return available_from;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setAvailable_from(LocalTime available_from) {
-        this.available_from = available_from;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public LocalTime getAvailable_to() {
-        return available_to;
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public void setAvailable_to(LocalTime available_to) {
-        this.available_to = available_to;
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 
-    public Double getChanneling_pay() {
-        return Channeling_pay;
+    public LocalTime getAvailableFrom() {
+        return availableFrom;
     }
 
-    public void setChanneling_pay(Double channeling_pay) {
-        Channeling_pay = channeling_pay;
+    public void setAvailableFrom(LocalTime availableFrom) {
+        this.availableFrom = availableFrom;
+    }
+
+    public LocalTime getAvailableTo() {
+        return availableTo;
+    }
+
+    public void setAvailableTo(LocalTime availableTo) {
+        this.availableTo = availableTo;
+    }
+
+    public Double getChannelingFee() {
+        return channelingFee;
+    }
+
+    public void setChannelingFee(Double channelingFee) {
+        this.channelingFee = channelingFee;
+    }
+
+    public Integer getMaxAppointmentsPerDay() {
+        return maxAppointmentsPerDay;
+    }
+
+    public void setMaxAppointmentsPerDay(Integer maxAppointmentsPerDay) {
+        this.maxAppointmentsPerDay = maxAppointmentsPerDay;
     }
 
     public List<Appointment> getAppointments() {
@@ -104,11 +134,11 @@ public class Doctor {
         this.appointments = appointments;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Boolean getActive() {
+        return isActive;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
