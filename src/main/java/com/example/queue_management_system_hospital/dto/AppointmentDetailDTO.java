@@ -1,14 +1,12 @@
 package com.example.queue_management_system_hospital.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 
 public class AppointmentDetailDTO {
     private int appDetailsId;
-    private Long appointmentId;
+    private Integer appointmentId;
     private String procedureName;
     private String notes;
     private String diagnosis;
@@ -17,7 +15,7 @@ public class AppointmentDetailDTO {
     public AppointmentDetailDTO() {
     }
 
-    public AppointmentDetailDTO(int appDetailsId, Long appointmentId, String procedureName, String notes, String diagnosis, String prescription) {
+    public AppointmentDetailDTO(int appDetailsId, Integer appointmentId, String procedureName, String notes, String diagnosis, String prescription) {
         this.appDetailsId = appDetailsId;
         this.appointmentId = appointmentId;
         this.procedureName = procedureName;
@@ -34,11 +32,11 @@ public class AppointmentDetailDTO {
         this.appDetailsId = appDetailsId;
     }
 
-    public Long getAppointmentId() {
+    public Integer getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(Long appointmentId) {
+    public void setAppointmentId(Integer appointmentId) {
         this.appointmentId = appointmentId;
     }
 

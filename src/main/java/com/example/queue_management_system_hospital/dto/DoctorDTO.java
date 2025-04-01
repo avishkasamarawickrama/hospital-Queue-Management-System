@@ -13,7 +13,7 @@ public class DoctorDTO {
     private int doctorId;
     private UUID userId;
     private String fullName;
-    private Long departmentId;
+    private Integer departmentId;
     private String departmentName;
     private String specialization;
     private LocalTime availableFrom;
@@ -26,7 +26,7 @@ public class DoctorDTO {
     public DoctorDTO() {
     }
 
-    public DoctorDTO(int doctorId, UUID userId, String fullName, Long departmentId, String departmentName, String specialization, LocalTime availableFrom, LocalTime availableTo, Double channelingFee, Integer maxAppointmentsPerDay, Boolean isActive, Integer todayAppointmentCount) {
+    public DoctorDTO(int doctorId, UUID userId, String fullName, Integer departmentId, String departmentName, String specialization, LocalTime availableFrom, LocalTime availableTo, Double channelingFee, Integer maxAppointmentsPerDay, Boolean isActive, Integer todayAppointmentCount) {
         this.doctorId = doctorId;
         this.userId = userId;
         this.fullName = fullName;
@@ -65,11 +65,11 @@ public class DoctorDTO {
         this.fullName = fullName;
     }
 
-    public Long getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Long departmentId) {
+    public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 

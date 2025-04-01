@@ -2,7 +2,6 @@ package com.example.queue_management_system_hospital.Controller;
 
 import com.example.queue_management_system_hospital.dto.DepartmentDTO;
 import com.example.queue_management_system_hospital.service.DepartmentService;
-import com.example.queue_management_system_hospital.service.impl.DepartmentServiceImpl;
 import com.example.queue_management_system_hospital.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

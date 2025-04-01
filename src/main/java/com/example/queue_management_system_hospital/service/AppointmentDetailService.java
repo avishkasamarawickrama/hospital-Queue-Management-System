@@ -1,17 +1,13 @@
 package com.example.queue_management_system_hospital.service;
 
 import com.example.queue_management_system_hospital.dto.AppointmentDetailDTO;
+
 import java.util.List;
 
 public interface AppointmentDetailService {
-
-    void addAppointmentDetail(AppointmentDetailDTO appointmentDetailDTO);
-
-    void updateAppointmentDetail(AppointmentDetailDTO appointmentDetailDTO);
-
-    void deleteAppointmentDetail(Long appointmentDetailId);
-
+    void addAppointmentDetail(AppointmentDetailDTO appointmentDetail);
+    void updateAppointmentDetail(AppointmentDetailDTO appointmentDetail);
+    boolean deleteAppointmentDetail(int id);
     List<AppointmentDetailDTO> getAllAppointmentDetails();
-
-    AppointmentDetailDTO getAppointmentDetailById(Long appointmentDetailId);
+    AppointmentDetailDTO getAppointmentDetailById(int id);
 }

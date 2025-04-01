@@ -1,8 +1,7 @@
 package com.example.queue_management_system_hospital.dto;
 
-import lombok.AllArgsConstructor;
+import com.example.queue_management_system_hospital.entity.Appointment;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,8 +11,8 @@ import java.util.Objects;
 
 public class AppointmentDTO {
     private int appointmentId;
-    private Long doctorId;
-    private Long patientId;
+    private Integer doctorId;
+    private Integer patientId;
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
     private Integer queueNumber;
@@ -30,10 +29,10 @@ public class AppointmentDTO {
         PENDING, PAID, REFUNDED
     }
 
-    public AppointmentDTO() {
+    public AppointmentDTO(Integer appointmentId, Integer doctorId, Integer patientId, LocalDate appointmentDate, LocalTime appointmentTime, Integer queueNumber, Appointment.AppointmentStatus status, Appointment.PaymentStatus paymentStatus, Double channelingFee, String departmentName) {
     }
 
-    public AppointmentDTO(int appointmentId, Long doctorId, Long patientId, LocalDate appointmentDate, LocalTime appointmentTime, Integer queueNumber, AppointmentStatus status, PaymentStatus paymentStatus, Double channelingFee, String departmentName) {
+    public AppointmentDTO(int appointmentId, Integer doctorId, Integer patientId, LocalDate appointmentDate, LocalTime appointmentTime, Integer queueNumber, AppointmentStatus status, PaymentStatus paymentStatus, Double channelingFee, String departmentName) {
         this.appointmentId = appointmentId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -54,19 +53,19 @@ public class AppointmentDTO {
         this.appointmentId = appointmentId;
     }
 
-    public Long getDoctorId() {
+    public Integer getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(Long doctorId) {
+    public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
     }
 
-    public Long getPatientId() {
+    public Integer getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(Long patientId) {
+    public void setPatientId(Integer patientId) {
         this.patientId = patientId;
     }
 

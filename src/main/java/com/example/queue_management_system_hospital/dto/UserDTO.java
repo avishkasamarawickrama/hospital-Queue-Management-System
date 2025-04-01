@@ -1,5 +1,8 @@
 package com.example.queue_management_system_hospital.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +15,13 @@ import java.util.UUID;
 @Component
 public class UserDTO {
     private UUID userId;
+//    @Email(message = "Invalid email format")
     private String email;
     private String fullName;
     private UserRole role;  // ADMIN, DOCTOR, PATIENT, STAFF
-    private String password;
+//    @NotBlank(message = "Password is required")
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$", message = "Invalid password format")
+     private String password;
 
     public enum UserRole {
         ADMIN, DOCTOR, PATIENT, STAFF
