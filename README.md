@@ -31,10 +31,23 @@ The **Hospital E-Channeling System** is a web-based application developed as par
 
 
 ### 🏠 Home Page  
-![Home Page](screenshots/home.png)
+## admin dashboard
 
-### 📋 Patient Registration Form  
-![Patient Registration](screenshots/patient-registration.png)
+![Screenshot 2025-04-16 224812](https://github.com/user-attachments/assets/351e930f-574d-465c-9ba9-8ca9d2894a78)
+
+## User-Dashboard
+
+![Screenshot 2025-04-16 225948](https://github.com/user-attachments/assets/b3285afc-c434-4b0a-b145-ed347b14feb9)
+
+
+### 📋 user Registration Form -admin  
+
+![Screenshot 2025-04-16 224844](https://github.com/user-attachments/assets/cca6593f-d7b3-43a2-b99e-41e879caddbc)
+
+![Screenshot 2025-04-16 230157](https://github.com/user-attachments/assets/c0ded924-539e-4c0a-9923-ef9f34a4334f)
+![Screenshot 2025-04-16 230226](https://github.com/user-attachments/assets/a92139fc-5095-47d5-8826-8ac5bfc031a3)
+
+![Screenshot 2025-04-16 230248](https://github.com/user-attachments/assets/83322dd9-d53b-4b68-9e4c-a86bad82b91f)
 
 ### 📅 Appointment Booking  
 ![Booking Form](screenshots/appointment-booking.png)
