@@ -1,4 +1,4 @@
-##GDSE 70
+![image](https://github.com/user-attachments/assets/a81d0fc7-3c0f-415f-b9eb-7f73b64568c8)##GDSE 70
 #2nd Semester Final Project 
 
 ## Smart Queue Management System for Hospital
@@ -16,8 +16,19 @@ The **Hospital E-Channeling System** is a web-based application developed as par
 - Real-time validation and interactive UI components
 
 ---
-
 ## 🖼️ Screenshots
+![Screenshot 2025-04-16 224349](https://github.com/user-attachments/assets/41133d70-89d4-456a-bd67-4ec7a252e659)
+
+## Features
+- User login form with fields for **username** and **password**.
+  
+  ![Screenshot 2025-04-16 224615](https://github.com/user-attachments/assets/c3ad787b-8ee0-4e3e-9ed0-d2cd11a06e6b)
+
+ ## Features
+- User register form with fields for **username** ,**email**,**role** and **password**.
+- user can add their user role only,it can be change admin.
+
+
 
 ### 🏠 Home Page  
 ![Home Page](screenshots/home.png)
