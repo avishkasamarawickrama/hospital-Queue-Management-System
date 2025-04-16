@@ -31,7 +31,12 @@ The **Hospital E-Channeling System** is a web-based application developed as par
 ### 📊 Admin Dashboard  
 ![Admin Dashboard](screenshots/admin-dashboard.png)
 
----
+🌐 Frontend (HTML, CSS, JavaScript)
+Navigate to the /frontend folder.
+
+Open index.html in your browser or deploy it using XAMPP / WAMP if you want it integrated with server-side routing.
+
+Ensure the endpoints in the JavaScript fetch() calls point to your backend API base URL.
 
 ## ⚙️ Setup Instructions
 
@@ -40,5 +45,15 @@ The **Hospital E-Channeling System** is a web-based application developed as par
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/hospital-echanneling-system.git
+
+📹 Link to the Demo Video
+🔗 Click here to watch the demo
+
+🎥 Video Naming Convention: ITS1114_Advanced API Development_HospitalEChanneling_YourFullName
+
+👩‍💻 Developed By
+Avishka Shasanthi Samarawickrama
+First Year - Higher Diploma in Computer Science
+IJSE - Institute of Software Engineering
 
 
