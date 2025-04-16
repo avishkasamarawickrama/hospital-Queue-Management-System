@@ -16,9 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -132,5 +131,49 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
 
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    public UserDTO getUserById(String id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.map(value -> modelMapper.map(value, UserDTO.class)).orElse(null);
+    }
+
+    @Override
+    public int updateUser(UserDTO userDTO) {
+        if (userRepository.existsById(userDTO.getUid())) {
+            User existingUser = userRepository.findById(userDTO.getUid()).orElse(null);
+            if (existingUser != null) {
+                // Update only the fields that should be updated
+                existingUser.setName(userDTO.getName());
+                existingUser.setEmail(userDTO.getEmail());
+                existingUser.setRole(userDTO.getRole());
+
+                // Only update password if it's provided
+                if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+                    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                    existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                }
+
+                userRepository.save(existingUser);
+                return VarList.OK;
+            }
+        }
+        return VarList.Not_Found;
+    }
+
+    @Override
+    public int deleteUser(String id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return VarList.OK;
+        }
+        return VarList.Not_Found;
+    }
 }
