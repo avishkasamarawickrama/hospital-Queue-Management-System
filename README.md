@@ -1,36 +1,70 @@
- 
-GDSE 70
-2nd Semester Final Project 
 
- Smart Queue Management System for Hospital
-A system that digitally manages patient queues, reducing wait times and improving hospital efficiency.
+#2nd Semester Final Project 
 
+## Smart Queue Management System for Hospital
+#A system that digitally manages patient queues, reducing wait times and improving hospital efficiency.
 
- Patient (User) :
- Online Queue Booking: Patients can book a queue number remotely for different departments (OPD, Lab, etc.).
- Real-Time Queue Updates: Patients can see their estimated wait time dynamically (using AJAX).
- Smart Priority System: Elderly and emergency patients get higher priority.
- Doctor Selection: Patients can choose a specific doctor based on availability.
- SMS/Email Notifications: Get notified when their turn is near.
- Patient Dashboard: View past visits, prescriptions, and upcoming appointments.
+## 📌 Project Description
 
- Kiosk Token Booking: Book a token from a self-service machine at the hospital.
+The **Hospital E-Channeling System** is a web-based application developed as part of the *ITS 1114 - Advanced API Development* final coursework. This system enables patients to conveniently book appointments with doctors online, reducing waiting times and streamlining hospital operations. The backend is developed using Java EE technologies, while the frontend is built with HTML, CSS, and JavaScript.
 
-*A Kiosk Token Booking System allows patients to book a queue number from a self-service machine (kiosk) at the hospital. Instead of waiting in a long queue to get a token from a receptionist, patients can use a touchscreen kiosk to generate their own queue number.
+**Key Features:**
+- Patient registration and login  
+- Doctor listing and selection by specialization  
+- Appointment booking and scheduling  
+- Admin dashboard to manage doctors, appointments, and users  
+- Real-time validation and interactive UI components
 
- Admin (Doctor & Staff) :
- Doctor Dashboard: See the current queue, mark patients as “Consulted” or “Referred”.
- Manage Queue Order: Reorder queue if needed (e.g., prioritize emergencies).
- Monitor Wait Times: View average patient wait times and optimize hospital flow.
- Assign Doctors: Assign patients to available doctors dynamically.
- Generate Reports: View hospital queue trends, patient visit history, and service analytics.
- Role-Based Access:
+---
+## 🖼️ Screenshots
+![Screenshot 2025-04-16 224349](https://github.com/user-attachments/assets/41133d70-89d4-456a-bd67-4ec7a252e659)
 
-Doctors: Manage patient queues and mark consultations.
-Admins: Manage hospital settings, doctors, and queues.
+## Features
+- User login form with fields for **username** and **password**.
+  
+  ![Screenshot 2025-04-16 224615](https://github.com/user-attachments/assets/c3ad787b-8ee0-4e3e-9ed0-d2cd11a06e6b)
 
+ ## Features
+- User register form with fields for **username** ,**email**,**role** and **password**.
+- user can add their user role only,it can be change admin.
 
 
- Additional Features (If Time Permits):
- Doctor Availability Scheduling – Doctors can set their available hours.
- Patient History Tracking – Patients can view their previous visits.
+
+### 🏠 Home Page  
+![Home Page](screenshots/home.png)
+
+### 📋 Patient Registration Form  
+![Patient Registration](screenshots/patient-registration.png)
+
+### 📅 Appointment Booking  
+![Booking Form](screenshots/appointment-booking.png)
+
+### 📊 Admin Dashboard  
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+🌐 Frontend (HTML, CSS, JavaScript)
+Navigate to the /frontend folder.
+
+Open index.html in your browser or deploy it using XAMPP / WAMP if you want it integrated with server-side routing.
+
+Ensure the endpoints in the JavaScript fetch() calls point to your backend API base URL.
+
+## ⚙️ Setup Instructions
+
+### 💻 Backend (Java EE / Servlet + JDBC)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/hospital-echanneling-system.git
+
+📹 Link to the Demo Video
+🔗 Click here to watch the demo
+
+🎥 Video Naming Convention: ITS1114_Advanced API Development_HospitalEChanneling_YourFullName
+
+👩‍💻 Developed By
+Avishka Shasanthi Samarawickrama
+First Year - Higher Diploma in Computer Science
+IJSE - Institute of Software Engineering
+
+
