@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/a81d0fc7-3c0f-415f-b9eb-7f73b64568c8)##GDSE 70
+
 #2nd Semester Final Project 
 
 ## Smart Queue Management System for Hospital
