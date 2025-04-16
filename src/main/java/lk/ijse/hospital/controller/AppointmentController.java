@@ -4,6 +4,7 @@ import lk.ijse.hospital.dto.AppointmentDTO;
 import lk.ijse.hospital.dto.AppointmentStatusUpdateRequest;
 import lk.ijse.hospital.dto.ResponseDTO;
 import lk.ijse.hospital.entity.Appointment;
+import lk.ijse.hospital.repo.AppointmentRepo;
 import lk.ijse.hospital.service.AppointmentService;
 import lk.ijse.hospital.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,32 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping("nextId")
-    public ResponseUtil getNextAppointmentId() {
-        return appointmentService.getNextAppointmentId();
+    @Autowired
+    private AppointmentRepo appointmentRepo;
+
+
+
+
+    @GetMapping("filter")
+    public ResponseUtil filterAppointments(
+            @RequestParam(required = false) LocalDate date,
+            @RequestParam(required = false) Integer doctorId,
+            @RequestParam(required = false) String status) {
+
+        return appointmentService.filterAppointments(date, doctorId, status);
     }
 
+    @GetMapping("nextId")
+    public ResponseUtil getNextAppointmentId() {
+        try {
+            // Get the highest current ID and add 1
+            Integer lastId = appointmentRepo.findMaxAppointmentId();
+            int nextId = (lastId != null) ? lastId + 1 : 1;
+            return new ResponseUtil(200, "Success", nextId);
+        } catch (Exception e) {
+            return new ResponseUtil(500, e.getMessage(), null);
+        }
+    }
     @PostMapping("save")
     public ResponseEntity<ResponseDTO> saveAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         try {
@@ -34,7 +56,7 @@ public class AppointmentController {
                     ResponseDTO.builder()
                             .code(200)
                             .message("Appointment Saved Successfully")
-                            .data(savedAppointment)
+                            .data(savedAppointment.getData()) // Make sure this includes all required fields
                             .build()
             );
         } catch (Exception e) {
@@ -84,10 +106,10 @@ public class AppointmentController {
         return appointmentService.getAppointmentsByPatient(patientId);
     }
 
-    @GetMapping("getAvailableSlots/{doctorId}/{date}")
+    @GetMapping("getAvailableSlots")
     public ResponseUtil getAvailableTimeSlots(
-            @PathVariable Integer doctorId,
-            @PathVariable LocalDate date) {
+            @RequestParam Integer doctorId,
+            @RequestParam LocalDate date) {
         return appointmentService.getAvailableTimeSlots(doctorId, date);
     }
 

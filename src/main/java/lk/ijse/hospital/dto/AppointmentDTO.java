@@ -23,7 +23,7 @@ public class AppointmentDTO {
     private PaymentStatus paymentStatus;
     private Double channelingFee;
     private String departmentName;
-
+    private String patientContact;
     public enum AppointmentStatus {
         PENDING, CONFIRMED, COMPLETED, CANCELLED
     }

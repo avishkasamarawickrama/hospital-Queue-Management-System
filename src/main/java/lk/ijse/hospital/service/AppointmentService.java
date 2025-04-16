@@ -20,6 +20,7 @@ public interface AppointmentService {
     ResponseUtil getAvailableTimeSlots(Integer doctorId, LocalDate date);
 
     // Add this new method
+    ResponseUtil filterAppointments(LocalDate date, Integer doctorId, String status);
 
     Appointment updateAppointmentStatus(Integer appointmentId, String status, String paymentStatus);
 }

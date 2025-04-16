@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -45,6 +46,10 @@ public class Appointment {
 
     @Column(name = "channeling_fee")
     private Double channelingFee;
+
+    @Column(name = "patient_contact")
+    private String patientContact;
+
 
     public enum PaymentStatus {
         PENDING, PAID, FAILED, REFUNDED
