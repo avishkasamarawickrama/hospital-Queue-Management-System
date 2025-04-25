@@ -68,6 +68,9 @@ Ensure the endpoints in the JavaScript fetch() calls point to your backend API b
    git clone https://github.com/avishkasamarawickrama/hospital-Queue-Management-System)
 
 📹 Link to the Demo Video
+https://www.canva.com/design/DAGldsYHF8k/dcaRDzOmDhMddr4UxCZDtw/edit?utm_content=DAGldsYHF8k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+can't upload video  to youtube due connections issues . you can see it on canva .
 🔗 Click here to watch the demo
 
 🎥 Video Naming Convention: ITS1114_Advanced API Development_HospitalEChanneling_YourFullName
